@@ -25,11 +25,11 @@ Plain static HTML/CSS/JS. No build step. Open `index.html` or serve the folder.
 
 ## Photo credits
 
-Part photos and logo: vanagain.com.
+Part photos and the VanAgain wordmark: vanagain.com.
 
 Van photos from Wikimedia Commons:
 
-- `hero-syncro.jpg` — 1989 Volkswagen Caravelle Club Westfalia Syncro, Spanish Coches, CC BY 2.0
+- `hero-topanga.jpg` — the owner's Vanagon Westfalia in Topanga Canyon (used with permission)
 - `van-bus.jpg` — METABUS, the owner's own late Bay Westfalia (used with permission)
 - `van-aircooled.jpg` — 1981 Volkswagen Transporter Westfalia, Riley from Christchurch, New Zealand, CC BY 2.0
 - `van-diesel.jpg` — 1984 Volkswagen T3 Westfalia Joker, Niels de Wit, CC BY 2.0
@@ -40,3 +40,7 @@ Van photos from Wikimedia Commons:
 - `camper.jpg` — Volkswagen Westfalia (Typ 2 - T3) interior, Spanish Coches, CC BY 2.0
 
 Photos are resized and cropped.
+
+---
+
+Rebuild by Barbine Worldwide. Design by metahacker.

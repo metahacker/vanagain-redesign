@@ -26,7 +26,8 @@ a:hover .arrow{transform:translateX(3px)}
 .hdr-top{display:flex;align-items:center;gap:22px;height:84px}
 .brand{display:flex;align-items:center;gap:10px;flex:none}
 .brand img{height:62px;width:auto;object-fit:contain}
-.brand.big img{height:120px}
+.brand img.wordmark{height:50px}
+.brand.big img.wordmark{height:64px}
 .brand b{font-weight:700;font-size:20px;letter-spacing:-.03em}
 .brand small{display:block;font:500 10px/1 var(--mono);color:var(--muted);letter-spacing:.06em;margin-top:3px}
 .search{flex:1;max-width:560px;position:relative}
@@ -235,7 +236,7 @@ a:hover .arrow{transform:translateX(3px)}
 @media (max-width:860px){
   .grid.g3{grid-template-columns:repeat(2,1fr)}
   .hero{height:min(72vh,640px)}
-  .hero img{object-position:30% 60%}
+  .hero img{object-position:78% 70%}
   .toolbar{flex-direction:column;align-items:flex-start}
   .seg{max-width:100%;overflow-x:auto}
   .seg a{white-space:nowrap}
@@ -243,7 +244,6 @@ a:hover .arrow{transform:translateX(3px)}
 @media (max-width:480px){.hdr-links .ct{display:none}.myvan .lbl b{font-size:12.5px}}
 
 /* branding */
-.hero img.hero-logo{width:clamp(150px,15vw,230px);height:auto;object-fit:contain;margin:0 0 22px -6px;filter:drop-shadow(0 6px 18px rgba(0,0,0,.35))}
 .hero .eyebrow{color:#ffd0a8}
 .hdr{border-bottom:3px solid var(--brand)}
 .split .tx{background:var(--char)}
@@ -252,5 +252,10 @@ a:hover .arrow{transform:translateX(3px)}
 .van li a.sel{box-shadow:inset 3px 0 0 var(--brand)}
 .tile.on .im{box-shadow:inset 0 0 0 2px var(--brand)}
 .ftr{border-top:3px solid var(--brand)}
-@media (max-width:860px){.brand img{height:50px}.hero img.hero-logo{width:130px;margin-bottom:14px}}
-@media (max-width:480px){.brand img{height:44px}}
+.hero img{object-position:60% 70%}
+@media (max-width:860px){.brand img.wordmark{height:34px}.hero img{object-position:78% 70%}}
+@media (max-width:480px){.brand img.wordmark{height:28px}}
+@media (max-width:860px){
+  .hero .copy{bottom:auto;top:28px}
+  .hero::after{background:linear-gradient(180deg,rgba(12,10,8,.7) 0%,rgba(12,10,8,.35) 45%,rgba(12,10,8,0) 65%)}
+}

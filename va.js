@@ -77,7 +77,7 @@ function header(active){
   return `
   <header class="hdr">
     <div class="wrap hdr-top">
-      <a class="brand" href="home.html" aria-label="VanAgain home"><img src="logo.png" alt="VanAgain — Parts + Help"></a>
+      <a class="brand" href="home.html" aria-label="VanAgain home"><img class="wordmark" src="wordmark.png" alt="VanAgain.com"></a>
       <label class="search">${ICON_SEARCH}<input placeholder="Search parts or part number — try 251615125C" aria-label="Search parts"></label>
       ${pill}
       <nav class="hdr-links"><a class="hide-md" href="#help">Help</a><a class="hide-sm" href="#">Account</a><a href="#" aria-label="Cart"><span class="ct">Cart</span><span class="cart-n">0</span></a></nav>
@@ -89,14 +89,14 @@ function footer(){
   return `
   <footer class="ftr"><div class="wrap">
     <div class="cols">
-      <div class="about"><a class="brand big" href="home.html"><img src="logo.png" alt="VanAgain"></a>
+      <div class="about"><a class="brand big" href="home.html"><img class="wordmark" src="wordmark.png" alt="VanAgain.com"></a>
         <p>Parts and advice for VW Bus, Vanagon and Eurovan owners. Keeping classic vans on the road since 1995.</p></div>
       <div><h4>Shop</h4><ul><li><a href="garage.html">Shop by van</a></li><li><a href="shop.html">All parts</a></li><li><a href="#">Camper parts</a></li><li><a href="#">Used &amp; rebuilt</a></li><li><a href="#">Garage &amp; Gifts</a></li></ul></div>
       <div><h4>Help</h4><ul><li><a href="#">Ask Ken about fitment</a></li><li><a href="#">Shipping</a></li><li><a href="#">Returns</a></li><li><a href="#">Track an order</a></li><li><a href="#">FAQ</a></li></ul></div>
       <div><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Journal</a></li><li><a href="#">Testimonials</a></li><li><a href="#">Rewards</a></li></ul></div>
       <div><h4>Contact</h4><ul><li><a href="#">Send a message</a></li><li><a href="#">Book a 30-min consult</a></li><li><a href="#">USD · English</a></li></ul></div>
     </div>
-    <div class="base"><span>Design mockup, Nov 2026. Not the live store.</span><span>Van photos: Wikimedia Commons, see <a href="https://github.com/metahacker/vanagain-redesign#photo-credits" style="text-decoration:underline">credits</a> · Part photos: vanagain.com</span></div>
+    <div class="base"><span>Rebuild by Barbine Worldwide. Design by metahacker.</span><span>Mockup, not the live store · <a href="https://github.com/metahacker/vanagain-redesign#photo-credits" style="text-decoration:underline">Photo credits</a></span></div>
   </div></footer>`;
 }
 function vanColumns(sel){
