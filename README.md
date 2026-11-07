@@ -30,13 +30,12 @@ Part photos and logo: vanagain.com.
 Van photos from Wikimedia Commons:
 
 - `hero-syncro.jpg` — 1989 Volkswagen Caravelle Club Westfalia Syncro, Spanish Coches, CC BY 2.0
-- `van-bus.jpg` — Volkswagen T2B Westfalia Campingbus, Brücke-Osteuropa, CC0
+- `van-bus.jpg` — METABUS, the owner's own late Bay Westfalia (used with permission)
 - `van-aircooled.jpg` — 1981 Volkswagen Transporter Westfalia, Riley from Christchurch, New Zealand, CC BY 2.0
 - `van-diesel.jpg` — 1984 Volkswagen T3 Westfalia Joker, Niels de Wit, CC BY 2.0
 - `van-19.jpg` — Volkswagen Westfalia (Typ 2 - T3), Spanish Coches, CC BY 2.0
 - `van-21.jpg` — 1986 Volkswagen T3 Westfalia Joker, Niels de Wit, CC BY 2.0
-- `van-ev25.jpg` — Westfalia California T4, Norbert Schnitzler, CC BY-SA 3.0
-- `van-ev28.jpg` — 2003 Volkswagen EuroVan GLS, MercurySable99, CC BY-SA 4.0
+- `van-eurovan.jpg` — Green VW T1 Sunroof and White VW T4 Camper, 2019 DC Bug Jam, DanTD, CC BY 4.0 (cropped to the Winnebago-built Eurovan Camper)
 - `story.jpg` — VW Vans + old Chevrolet truck, dave_7 from Lethbridge, Canada, CC BY 2.0
 - `camper.jpg` — Volkswagen Westfalia (Typ 2 - T3) interior, Spanish Coches, CC BY 2.0
 

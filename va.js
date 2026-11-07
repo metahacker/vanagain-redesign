@@ -7,13 +7,13 @@ const VANS = [
   {key:'dsl',  fam:'vanagon', name:'Vanagon', eng:'Diesel 1.6',     code:'CS',  yrs:'1982–84', tag:'82-84 Diesel Vanagon', n:984, img:'van-diesel.jpg'},
   {key:'19',   fam:'vanagon', name:'Vanagon', eng:'Wasserboxer 1.9L', code:'DH', yrs:'1983–85', tag:'83-85 1.9L Vanagon', n:1164, img:'van-19.jpg'},
   {key:'21',   fam:'vanagon', name:'Vanagon', eng:'Wasserboxer 2.1L', code:'MV', yrs:'1986–92', tag:'86-92 2.1L Vanagon', n:1294, img:'van-21.jpg', note:'incl. Syncro'},
-  {key:'ev25', fam:'eurovan', name:'Eurovan', eng:'2.5L five', code:'AAF · ACU', yrs:'1992–96', tag:'92-96 2.5L Eurovan', n:373, img:'van-ev25.jpg'},
-  {key:'ev28', fam:'eurovan', name:'Eurovan', eng:'2.8L VR6', code:'AES · AXK', yrs:'1997–03', tag:'97-03 2.8L Eurovan', n:338, img:'van-ev28.jpg'},
+  {key:'ev25', fam:'eurovan', name:'Eurovan', eng:'2.5L five', code:'AAF · ACU', yrs:'1992–96', tag:'92-96 2.5L Eurovan', n:373, img:'van-eurovan.jpg'},
+  {key:'ev28', fam:'eurovan', name:'Eurovan', eng:'2.8L VR6', code:'AES · AXK', yrs:'1997–03', tag:'97-03 2.8L Eurovan', n:338, img:'van-eurovan.jpg'},
 ];
 const FAMS = [
-  {key:'bus', name:'Bus', yrs:'1968–1979', img:'van-bus.jpg', alt:'Red 1970s VW Bus Westfalia with pop-top'},
+  {key:'bus', name:'Bus', yrs:'1968–1979', img:'van-bus.jpg', alt:'Orange late Bay Westfalia, METABUS, in the desert'},
   {key:'vanagon', name:'Vanagon', yrs:'1980–1992', img:'van-21.jpg', alt:'Tan 1986 Vanagon Westfalia Joker'},
-  {key:'eurovan', name:'Eurovan', yrs:'1992–2003', img:'van-ev25.jpg', alt:'Blue Eurovan Westfalia high-top'},
+  {key:'eurovan', name:'Eurovan', yrs:'1992–2003', img:'van-eurovan.jpg', alt:'Blue Eurovan Westfalia high-top'},
 ];
 // System → count per van tag (real catalog counts)
 const T = ['68-79 Bus','80-83 Air Cooled Vanagon','82-84 Diesel Vanagon','83-85 1.9L Vanagon','86-92 2.1L Vanagon','92-96 2.5L Eurovan','97-03 2.8L Eurovan'];
@@ -73,7 +73,7 @@ function header(active){
   return `
   <header class="hdr">
     <div class="wrap hdr-top">
-      <a class="brand" href="home.html"><img src="logo.jpg" alt=""><span><b>VanAgain</b><small>SINCE 1995</small></span></a>
+      <a class="brand" href="home.html" aria-label="VanAgain home"><img src="logo.png" alt="VanAgain — Parts + Help"></a>
       <label class="search">${ICON_SEARCH}<input placeholder="Search parts or part number — try 251615125C" aria-label="Search parts"></label>
       ${pill}
       <nav class="hdr-links"><a class="hide-md" href="#help">Help</a><a class="hide-sm" href="#">Account</a><a href="#" aria-label="Cart"><span class="ct">Cart</span><span class="cart-n">0</span></a></nav>
@@ -85,7 +85,7 @@ function footer(){
   return `
   <footer class="ftr"><div class="wrap">
     <div class="cols">
-      <div class="about"><a class="brand" href="home.html"><img src="logo.jpg" alt=""><span><b>VanAgain</b></span></a>
+      <div class="about"><a class="brand big" href="home.html"><img src="logo.png" alt="VanAgain"></a>
         <p>Parts and advice for VW Bus, Vanagon and Eurovan owners. Keeping classic vans on the road since 1995.</p></div>
       <div><h4>Shop</h4><ul><li><a href="garage.html">Shop by van</a></li><li><a href="shop.html">All parts</a></li><li><a href="#">Camper parts</a></li><li><a href="#">Used &amp; rebuilt</a></li><li><a href="#">Garage &amp; Gifts</a></li></ul></div>
       <div><h4>Help</h4><ul><li><a href="#">Ask Ken about fitment</a></li><li><a href="#">Shipping</a></li><li><a href="#">Returns</a></li><li><a href="#">Track an order</a></li><li><a href="#">FAQ</a></li></ul></div>

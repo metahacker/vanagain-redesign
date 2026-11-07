@@ -1,7 +1,7 @@
 /* VanAgain redesign mockup — shared styles */
 :root{
   --ink:#141412; --ink-2:#3a3a36; --muted:#77756e; --line:#e3e0d8; --line-2:#d3cfc4;
-  --paper:#fbfaf7; --tile:#efece5; --tile-2:#e7e3da; --accent:#c4501f; --ok:#2f7d4f;
+  --paper:#fbfaf7; --tile:#efece5; --tile-2:#e7e3da; --accent:#f3771f; --brand:#f3771f; --char:#3d3d3d; --ok:#2f7d4f;
   --wrap:1320px; --pad:clamp(16px,3vw,40px);
   --sans:"Inter Tight",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -23,9 +23,10 @@ a:hover .arrow{transform:translateX(3px)}
 
 /* ── Header ───────────────────────────────── */
 .hdr{position:sticky;top:0;z-index:20;background:rgba(251,250,247,.94);backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
-.hdr-top{display:flex;align-items:center;gap:20px;height:72px}
+.hdr-top{display:flex;align-items:center;gap:22px;height:84px}
 .brand{display:flex;align-items:center;gap:10px;flex:none}
-.brand img{width:40px;height:40px;object-fit:contain;mix-blend-mode:multiply}
+.brand img{height:62px;width:auto;object-fit:contain}
+.brand.big img{height:120px}
 .brand b{font-weight:700;font-size:20px;letter-spacing:-.03em}
 .brand small{display:block;font:500 10px/1 var(--mono);color:var(--muted);letter-spacing:.06em;margin-top:3px}
 .search{flex:1;max-width:560px;position:relative}
@@ -48,7 +49,7 @@ a:hover .arrow{transform:translateX(3px)}
 .rail::-webkit-scrollbar{display:none}
 .rail a{flex:none;font-size:14px;color:var(--ink-2);padding:7px 12px;border-radius:999px;white-space:nowrap}
 .rail a:hover{background:var(--tile)}
-.rail a.on{background:var(--ink);color:#fff}
+.rail a.on{background:var(--brand);color:#fff}
 .rail .sep{flex:none;width:1px;height:18px;background:var(--line-2);margin:0 8px}
 .rail .quiet{color:var(--muted)}
 
@@ -225,7 +226,7 @@ a:hover .arrow{transform:translateX(3px)}
 @media (max-width:860px){.hero .credit{display:none}}
 @media (max-width:480px){
   .hdr-top{gap:8px 10px}
-  .brand b{font-size:17px}.brand img{width:32px;height:32px}
+  .brand b{font-size:17px}
   .myvan{height:40px}.myvan .thumb{width:30px;height:30px}
   .hdr-links{gap:0}.hdr-links a{font-size:14px}
 }
@@ -240,3 +241,16 @@ a:hover .arrow{transform:translateX(3px)}
   .seg a{white-space:nowrap}
 }
 @media (max-width:480px){.hdr-links .ct{display:none}.myvan .lbl b{font-size:12.5px}}
+
+/* branding */
+.hero img.hero-logo{width:clamp(150px,15vw,230px);height:auto;object-fit:contain;margin:0 0 22px -6px;filter:drop-shadow(0 6px 18px rgba(0,0,0,.35))}
+.hero .eyebrow{color:#ffd0a8}
+.hdr{border-bottom:3px solid var(--brand)}
+.split .tx{background:var(--char)}
+.split .tx .btn{background:var(--brand);color:#fff}
+.band .btn{background:var(--brand);color:#fff}
+.van li a.sel{box-shadow:inset 3px 0 0 var(--brand)}
+.tile.on .im{box-shadow:inset 0 0 0 2px var(--brand)}
+.ftr{border-top:3px solid var(--brand)}
+@media (max-width:860px){.brand img{height:50px}.hero img.hero-logo{width:130px;margin-bottom:14px}}
+@media (max-width:480px){.brand img{height:44px}}
