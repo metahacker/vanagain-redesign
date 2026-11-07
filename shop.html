@@ -56,24 +56,27 @@
   document.getElementById('hdr').outerHTML = header(cat);
   document.getElementById('ftr').outerHTML = footer();
   const v = VAN;
-  const i = vIdx(v);
+  const i = v ? vIdx(v) : -1;
   const sys = SYS.find(s => s.key === cat);
-  const total = sys ? sys.byv[i] : v.n;
-  document.getElementById('fit').innerHTML = `
+  const total = v ? (sys ? sys.byv[i] : v.n) : (sys ? sys.total : 2699);
+  const cq = cat ? 'cat=' + cat + '&' : '';
+  document.getElementById('fit').innerHTML = v ? `
     <img class="vimg" src="${v.img}" alt="">
     <div><div class="eyebrow">${sys ? 'Shop · ' + sys.name : 'Shop all parts'}</div>
       <h1 style="margin-top:8px">${v.yrs} ${v.name}${v.fam==='bus'?'':' — '+v.eng}</h1>
       <div class="sub"><span class="ok">● ${fmt(total)} parts fit this van</span><span class="mono">engine ${v.code}${v.note?' · '+v.note:''}</span></div></div>
-    <div class="act"><a class="btn ghost" href="garage.html">Change van</a><a class="btn ghost" href="#">Show all vans</a></div>`;
+    <div class="act"><a class="btn ghost" href="garage.html">Change van</a><a class="btn ghost" href="shop.html?${cq}van=all" title="Turn off the van filter">All vans</a></div>`
+  : `
+    <div><div class="eyebrow">${sys ? 'Shop · ' + sys.name : 'Shop all parts'}</div>
+      <h1 style="margin-top:8px">All vans</h1>
+      <div class="sub"><span>${fmt(total)} parts for Bus, Vanagon and Eurovan. Fitment is shown on every part.</span></div></div>
+    <div class="act">${SAVED ? `<a class="btn" href="shop.html?${cq}van=${SAVED.key}">Back to my ${SAVED.yrs} ${SAVED.name}</a>` : ''}<a class="btn ghost" href="garage.html">${SAVED ? 'Change van' : 'Choose your van'}</a></div>`;
   document.getElementById('strip').innerHTML = tiles({van:v, on:cat, short:true});
-  document.getElementById('side-sys').innerHTML =
-    `<li><a href="shop.html?van=${v.key}" class="${cat?'':'on'}">All systems <span class="n">${fmt(v.n)}</span></a></li>` +
-    SYS.map(s => `<li><a href="shop.html?cat=${s.key}&van=${v.key}" class="${cat===s.key?'on':''}">${s.name}<span class="n">${fmt(s.byv[i])}</span></a></li>`).join('');
-  const fitting = PRODUCTS.filter(p => p.vans.includes(v.key));
-  const show = cat ? fitting.filter(p => p.cat === cat) : fitting;
-  document.getElementById('grid').innerHTML = show.length ? show.map(p => card(p, true)).join('')
+  const pool = v ? PRODUCTS.filter(p => p.vans.includes(v.key)) : PRODUCTS;
+  const show = cat ? pool.filter(p => p.cat === cat) : pool;
+  document.getElementById('grid').innerHTML = show.length ? show.map(p => card(p, !!v)).join('')
     : `<p style="grid-column:1/-1;color:var(--muted);padding:40px 0">Mockup sample data covers the 1986–92 Vanagon. In the real build this grid lists the ${fmt(total)} parts above.</p>`;
-  if (v.key !== '21') document.getElementById('jobs').style.display = 'none';
+  if (!v || v.key !== '21') document.getElementById('jobs').style.display = 'none';
   document.getElementById('count').innerHTML = `<b>${fmt(total)}</b> parts${sys ? ' in ' + sys.name : ''}`;
   document.getElementById('shown').textContent = `Showing ${show.length} of ${fmt(total)}`;
 </script>

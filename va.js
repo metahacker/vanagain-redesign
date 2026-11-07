@@ -21,17 +21,17 @@ const SYS = [
   {key:'engine',     name:'Engine',               img:'cat-engine.jpg',     total:634, byv:[189,133,158,169,173,94,91]},
   {key:'cooling',    name:'Cooling',              img:'cat-cooling.jpg',    total:252, byv:[11,10,59,84,104,42,25]},
   {key:'fuel',       name:'Fuel & Air',           img:'cat-fuel.jpg',       total:264, byv:[74,94,67,104,113,16,27]},
-  {key:'electrical', name:'Electrical',           img:'cat-electrical.jpg', total:454, byv:[112,160,127,182,221,103,63]},
+  {key:'electrical', name:'Electrical & Ignition',           img:'cat-electrical.jpg', total:454, byv:[112,160,127,182,221,103,63]},
   {key:'brakes',     name:'Brakes',               img:'cat-brakes.jpg',     total:232, byv:[77,86,87,87,104,33,50]},
   {key:'suspension', name:'Suspension & Steering',img:'cat-suspension.jpg', total:188, byv:[30,89,89,110,112,31,32]},
   {key:'gearbox',    name:'Gearbox & Clutch',     img:'cat-gearbox.jpg',    total:293, byv:[109,123,101,143,152,53,36]},
   {key:'exhaust',    name:'Exhaust',              img:'cat-exhaust.jpg',    total:123, byv:[40,22,24,19,31,14,9]},
   {key:'body',       name:'Body & Trim',          img:'cat-body.jpg',       total:507, byv:[63,328,336,354,382,42,38]},
   {key:'climate',    name:'Heat & A/C',           img:'cat-climate.jpg',    total:101, byv:[14,24,20,36,55,13,15]},
-  {key:'camper',     name:'Camper',               img:'camper.jpg', photo:true, total:69, byv:[16,54,50,59,54,13,13]},
+  {key:'camper',     name:'Camper',               img:'cat-camper.jpg', total:69, byv:[16,54,50,59,54,13,13]},
   {key:'tools',      name:'Tools & Hardware',     img:'cat-tools.jpg',      total:29,  byv:[21,13,14,16,12,8,7]},
 ];
-const SHORT = {engine:'Engine',cooling:'Cooling',fuel:'Fuel & Air',electrical:'Electrical',brakes:'Brakes',suspension:'Suspension',gearbox:'Gearbox',exhaust:'Exhaust',body:'Body & Trim',climate:'Heat & A/C',camper:'Camper',tools:'Tools'};
+const SHORT = {engine:'Engine',cooling:'Cooling',fuel:'Fuel & Air',electrical:'Electrical & Ignition',brakes:'Brakes',suspension:'Suspension',gearbox:'Gearbox',exhaust:'Exhaust',body:'Body & Trim',climate:'Heat & A/C',camper:'Camper',tools:'Tools'};
 // Real products (titles tidied: fitment moved out of the name into its own line)
 const PRODUCTS = [
   {img:'p-caliper.jpg',   cat:'brakes',     nm:'Brake caliper carrier',              sku:'251615125C',   pr:79.95,  fits:'1986–91 Vanagon', vans:['21']},
@@ -51,7 +51,10 @@ const PRODUCTS = [
 const fmt = n => n.toLocaleString('en-US');
 const money = n => '$' + n.toFixed(2);
 const qs = new URLSearchParams(location.search);
+const ALL = qs.get('van') === 'all';
+const SAVED = VANS.find(v => v.key === localStorage.getItem('va-van')) || null;
 function getVan(){
+  if (ALL) return null;
   const k = qs.get('van') || localStorage.getItem('va-van') || (document.body.dataset.defaultVan || '');
   return VANS.find(v => v.key === k) || null;
 }
@@ -66,8 +69,9 @@ function header(active){
   const v = VAN;
   const pill = v
     ? `<a class="myvan" href="garage.html" title="Change van"><img class="thumb" src="${v.img}" alt=""><span class="lbl"><small>My van</small><b>${label(v)}</b></span><span class="chg">Change</span></a>`
+    : ALL ? `<a class="myvan" href="garage.html"><img class="thumb" src="${SAVED?SAVED.img:'van-21.jpg'}" alt=""><span class="lbl"><small>My van · filter off</small><b>All vans</b></span><span class="chg">Set</span></a>`
     : `<a class="myvan empty" href="garage.html"><img class="thumb" src="van-21.jpg" alt=""><span class="lbl"><small>My van</small><b>Choose your van</b></span><span class="chg">Set</span></a>`;
-  const vq = v ? `&van=${v.key}` : '';
+  const vq = v ? `&van=${v.key}` : (ALL ? '&van=all' : '');
   const rail = SYS.map(s => `<a href="shop.html?cat=${s.key}${vq}" class="${active===s.key?'on':''}">${SHORT[s.key]}</a>`).join('')
     + `<span class="sep"></span><a class="quiet" href="#">Garage &amp; Gifts</a><a class="quiet" href="#">Used &amp; rebuilt</a><a class="quiet" href="#">Sale</a>`;
   return `
@@ -108,7 +112,7 @@ function tiles(opts={}){
   const v = opts.van, on = opts.on;
   return SYS.map(s => {
     const n = v ? s.byv[vIdx(v)] : s.total;
-    const vq = v ? `&van=${v.key}` : '';
+    const vq = v ? `&van=${v.key}` : (ALL ? '&van=all' : '');
     return `<a class="tile ${on===s.key?'on':''}" href="shop.html?cat=${s.key}${vq}" data-cat="${s.key}">
       <div class="im"><img class="${s.photo?'photo':''}" src="${s.img}" alt="" loading="lazy"></div>
       <div class="t"><span>${opts.short?SHORT[s.key]:s.name}</span><span class="n">${fmt(n)}</span></div></a>`;
