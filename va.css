@@ -236,7 +236,7 @@ a:hover .arrow{transform:translateX(3px)}
 @media (max-width:860px){
   .grid.g3{grid-template-columns:repeat(2,1fr)}
   .hero{height:min(72vh,640px)}
-  .hero img{object-position:78% 70%}
+  .hero img{object-position:78% 100%}
   .toolbar{flex-direction:column;align-items:flex-start}
   .seg{max-width:100%;overflow-x:auto}
   .seg a{white-space:nowrap}
@@ -252,8 +252,8 @@ a:hover .arrow{transform:translateX(3px)}
 .van li a.sel{box-shadow:inset 3px 0 0 var(--brand)}
 .tile.on .im{box-shadow:inset 0 0 0 2px var(--brand)}
 .ftr{border-top:3px solid var(--brand)}
-.hero img{object-position:60% 70%}
-@media (max-width:860px){.brand img.wordmark{height:34px}.hero img{object-position:78% 70%}}
+.hero img{object-position:50% 100%}
+@media (max-width:860px){.brand img.wordmark{height:34px}.hero img{object-position:78% 100%}}
 @media (max-width:480px){.brand img.wordmark{height:28px}}
 @media (max-width:860px){
   .hero .copy{bottom:auto;top:28px}

@@ -35,7 +35,7 @@ Van photos from Wikimedia Commons:
 - `van-diesel.jpg` — 1984 Volkswagen T3 Westfalia Joker, Niels de Wit, CC BY 2.0
 - `van-19.jpg` — Volkswagen Westfalia (Typ 2 - T3), Spanish Coches, CC BY 2.0
 - `van-21.jpg` — 1986 Volkswagen T3 Westfalia Joker, Niels de Wit, CC BY 2.0
-- `van-eurovan.jpg` — Green VW T1 Sunroof and White VW T4 Camper, 2019 DC Bug Jam, DanTD, CC BY 4.0 (cropped to the Winnebago-built Eurovan Camper)
+- `van-eurovan.jpg` — VW Eurovan EVC (Eurovan Camper), Cocoablini, CC BY-SA 4.0
 - `story.jpg` — VW Vans + old Chevrolet truck, dave_7 from Lethbridge, Canada, CC BY 2.0
 - `camper.jpg` — Volkswagen Westfalia (Typ 2 - T3) interior, Spanish Coches, CC BY 2.0
 
