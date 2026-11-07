@@ -34,6 +34,7 @@ Van photos from Wikimedia Commons:
 - `van-aircooled.jpg` — 1981 Volkswagen Transporter Westfalia, Riley from Christchurch, New Zealand, CC BY 2.0
 - `van-diesel.jpg` — 1984 Volkswagen T3 Westfalia Joker, Niels de Wit, CC BY 2.0
 - `van-19.jpg` — Volkswagen Westfalia (Typ 2 - T3), Spanish Coches, CC BY 2.0
+- `van-vanagon.jpg` — the owner's Vanagon Syncro, placed in a forest river scene with an image model (from his own photo)
 - `van-21.jpg` — 1986 Volkswagen T3 Westfalia Joker, Niels de Wit, CC BY 2.0
 - `van-eurovan.jpg` — VW Eurovan EVC (Eurovan Camper), Cocoablini, CC BY-SA 4.0
 - `story.jpg` — VW Vans + old Chevrolet truck, dave_7 from Lethbridge, Canada, CC BY 2.0

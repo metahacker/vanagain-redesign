@@ -12,7 +12,7 @@ const VANS = [
 ];
 const FAMS = [
   {key:'bus', name:'Bus', yrs:'1968–1979', img:'van-bus.jpg', alt:'Orange late Bay Westfalia, METABUS, in the desert'},
-  {key:'vanagon', name:'Vanagon', yrs:'1980–1992', img:'van-21.jpg', alt:'Tan 1986 Vanagon Westfalia Joker'},
+  {key:'vanagon', name:'Vanagon', yrs:'1980–1992', img:'van-vanagon.jpg', alt:'Green Vanagon Syncro with roof light bar and bull bar fording a forest river'},
   {key:'eurovan', name:'Eurovan', yrs:'1992–2003', img:'van-eurovan.jpg', alt:'Blue Eurovan Westfalia high-top'},
 ];
 // System → count per van tag (real catalog counts)
