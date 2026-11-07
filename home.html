@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VanAgain — Home (redesign mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="va.css">
+</head>
+<body>
+<div id="hdr"></div>
+
+<section class="hero">
+  <img src="hero-syncro.jpg" alt="Gold 1989 Vanagon Syncro Westfalia parked on a gravel lot">
+  <div class="copy"><div class="wrap">
+    <div class="eyebrow">Bus · Vanagon · Eurovan — parts since 1995</div>
+    <h1>Keep it on the road.</h1>
+    <p>2,699 parts, sorted by the van you actually drive. Pick yours once and everything you see fits.</p>
+  </div></div>
+  <div class="credit">1989 Caravelle Syncro Westfalia · Wikimedia Commons, CC BY 2.0</div>
+</section>
+
+<section class="sec" id="vans"><div class="wrap">
+  <div class="sec-head">
+    <div><div class="eyebrow">Step one</div><h2 style="margin-top:12px">Which van is yours?</h2>
+      <p>Choose the generation and engine. We remember it, so every page after this only shows parts that fit.</p></div>
+    <a class="link" href="garage.html">Not sure? How to tell <span class="arrow">→</span></a>
+  </div>
+  <div class="vans" id="vans-cols"></div>
+</div></section>
+
+<section class="sec tint"><div class="wrap">
+  <div class="sec-head">
+    <div><div class="eyebrow">Or start with the job</div><h2 style="margin-top:12px">Shop by system</h2></div>
+    <a class="link" href="shop.html">All 2,699 parts <span class="arrow">→</span></a>
+  </div>
+  <div class="tiles" id="tiles"></div>
+</div></section>
+
+<section class="split" id="help">
+  <div class="ph"><img src="story.jpg" alt="White Vanagon parked beside an old Chevrolet pickup" loading="lazy"><span class="credit-sm">Wikimedia Commons, CC BY 2.0</span></div>
+  <div class="tx">
+    <div class="eyebrow">Fitment help</div>
+    <h2>Not sure it fits?<br>Ask Ken.</h2>
+    <p>Ken Wilford has spent thirty years answering Vanagon questions. Send what you know and get a straight answer before you order.</p>
+    <dl><dt>Send</dt><dd>Model year, engine code, and the part number off the old part if you have it.</dd>
+        <dt>Or</dt><dd>Book a 30-minute call for a diagnosis or a build plan — $125.</dd></dl>
+    <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="#">Ask a fitment question</a><a class="btn ghost" href="#">Book a call</a></div>
+  </div>
+</section>
+
+<section class="sec"><div class="wrap">
+  <div class="sec-head">
+    <div><div class="eyebrow">On the shelf now</div><h2 style="margin-top:12px">Common jobs, in stock</h2></div>
+    <a class="link" href="shop.html">Shop everything <span class="arrow">→</span></a>
+  </div>
+  <div class="grid" id="picks"></div>
+</div></section>
+
+<section class="band">
+  <img src="camper.jpg" alt="Interior of a Vanagon Westfalia camper, bench seat and cabinets" loading="lazy">
+  <div class="copy"><div class="wrap">
+    <div class="eyebrow" style="color:rgba(255,255,255,.75)">Westfalia</div>
+    <h2 style="margin:14px 0 16px">Westfalia parts, down to the stickers.</h2>
+    <p>Pop-top canvas, seals, elastic cords, skylight kits and the original stickers — 69 Westfalia parts across Bus, Vanagon and Eurovan.</p>
+    <a class="btn" href="shop.html?cat=camper">Shop camper parts <span class="arrow">→</span></a>
+  </div></div>
+</section>
+
+<div id="ftr"></div>
+<script src="va.js"></script>
+<script>
+  document.getElementById('hdr').outerHTML = header();
+  document.getElementById('ftr').outerHTML = footer();
+  document.getElementById('vans-cols').innerHTML = vanColumns(VAN);
+  document.getElementById('tiles').innerHTML = tiles({van:VAN, short:false});
+  document.getElementById('picks').innerHTML = [0,2,1,5].map(i => card(PRODUCTS[i])).join('');
+</script>
+</body></html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VanAgain — Choose your van (redesign mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="va.css">
+</head>
+<body>
+<div id="hdr"></div>
+<div class="wrap">
+  <div class="garage-h">
+    <div class="eyebrow">My van</div>
+    <h1 style="margin-top:14px">Which van are you<br>working on?</h1>
+    <p>Pick once. The whole store filters to it, and every part page says plainly whether it fits.</p>
+  </div>
+  <div class="vans" id="vans-cols"></div>
+  <div class="howto">
+    <div><b>Air-cooled or water-cooled?</b><p>Water-cooled Vanagons (mid-1983 on) have a second grille under the headlights for the front radiator. Air-cooled vans have one.</p></div>
+    <div><b>1.9L or 2.1L?</b><p>The engine code is stamped on the case. DH is the 1.9L, MV is the 2.1L. Syncro 4WD vans use the 2.1L list.</p></div>
+    <div><b>Still not sure?</b><p>Send Ken your VIN or a photo of the engine bay and he will tell you which list to use. <a href="home.html#help" style="text-decoration:underline">Ask Ken</a></p></div>
+  </div>
+</div>
+<div style="height:96px"></div>
+<div id="ftr"></div>
+<script src="va.js"></script>
+<script>
+  document.getElementById('hdr').outerHTML = header();
+  document.getElementById('ftr').outerHTML = footer();
+  document.getElementById('vans-cols').innerHTML = vanColumns(VAN);
+</script>
+</body></html>

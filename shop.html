@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VanAgain — Shop (redesign mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="va.css">
+</head>
+<body data-default-van="21">
+<div id="hdr"></div>
+
+<section class="fitbar"><div class="wrap" id="fit"></div></section>
+
+<div class="wrap">
+  <div style="padding-top:36px">
+    <div class="strip" id="strip"></div>
+  </div>
+</div>
+
+<div class="wrap shop">
+  <aside class="side">
+    <ul id="side-sys" style="display:none"></ul>
+    <div class="grp"><h4>Availability</h4>
+      <label><span class="l"><input type="checkbox" checked>In stock</span><span class="n">ships today</span></label>
+      <label><span class="l"><input type="checkbox">Special order</span><span class="n"></span></label></div>
+    <div class="grp"><h4>Condition</h4>
+      <label><span class="l"><input type="checkbox" checked>New</span></label>
+      <label><span class="l"><input type="checkbox">Used</span></label>
+      <label><span class="l"><input type="checkbox">Rebuilt / exchange</span></label></div>
+    <div class="grp"><h4>Price</h4><ul>
+      <li><a href="#">Under $25</a></li><li><a href="#">$25 – $100</a></li><li><a href="#">$100 – $300</a></li><li><a href="#">$300 and up</a></li></ul></div>
+    <div class="grp" style="border:0"><h4>Can't find it?</h4>
+      <p style="margin:0;color:var(--muted);font-size:14px">Search by the number stamped on the old part, or <a href="home.html#help" style="text-decoration:underline">ask Ken</a>.</p></div>
+  </aside>
+
+  <main>
+    <div class="toolbar" style="margin-top:0">
+      <div class="count" id="count"></div>
+      <div class="seg"><a class="on" href="#">Most popular</a><a href="#">Price ↑</a><a href="#">Price ↓</a><a href="#">Newest</a></div>
+    </div>
+    <div class="grid g3" id="grid"></div>
+    <div class="more"><span id="shown"></span><div class="bar"><i></i></div><a class="btn ghost" href="#">Show 24 more</a></div>
+
+    <div class="jobs" id="jobs">
+      <a class="job" href="#"><b>Front brake job</b><span>Pads, caliper carrier, hoses, brackets and fluid for one axle.</span><span class="mono">Proposed bundle</span></a>
+      <a class="job" href="#"><b>Cooling refresh</b><span>Hoses, thermostat, sender switches and coolant for the Wasserboxer.</span><span class="mono">Proposed bundle</span></a>
+      <a class="job" href="#"><b>Tune-up</b><span>Plugs, cap, rotor, wires, filters for a 2.1L Digifant engine.</span><span class="mono">Proposed bundle</span></a>
+    </div>
+  </main>
+</div>
+
+<div id="ftr"></div>
+<script src="va.js"></script>
+<script>
+  const cat = qs.get('cat') || '';
+  document.getElementById('hdr').outerHTML = header(cat);
+  document.getElementById('ftr').outerHTML = footer();
+  const v = VAN;
+  const i = vIdx(v);
+  const sys = SYS.find(s => s.key === cat);
+  const total = sys ? sys.byv[i] : v.n;
+  document.getElementById('fit').innerHTML = `
+    <img class="vimg" src="${v.img}" alt="">
+    <div><div class="eyebrow">${sys ? 'Shop · ' + sys.name : 'Shop all parts'}</div>
+      <h1 style="margin-top:8px">${v.yrs} ${v.name}${v.fam==='bus'?'':' — '+v.eng}</h1>
+      <div class="sub"><span class="ok">● ${fmt(total)} parts fit this van</span><span class="mono">engine ${v.code}${v.note?' · '+v.note:''}</span></div></div>
+    <div class="act"><a class="btn ghost" href="garage.html">Change van</a><a class="btn ghost" href="#">Show all vans</a></div>`;
+  document.getElementById('strip').innerHTML = tiles({van:v, on:cat, short:true});
+  document.getElementById('side-sys').innerHTML =
+    `<li><a href="shop.html?van=${v.key}" class="${cat?'':'on'}">All systems <span class="n">${fmt(v.n)}</span></a></li>` +
+    SYS.map(s => `<li><a href="shop.html?cat=${s.key}&van=${v.key}" class="${cat===s.key?'on':''}">${s.name}<span class="n">${fmt(s.byv[i])}</span></a></li>`).join('');
+  const fitting = PRODUCTS.filter(p => p.vans.includes(v.key));
+  const show = cat ? fitting.filter(p => p.cat === cat) : fitting;
+  document.getElementById('grid').innerHTML = show.length ? show.map(p => card(p, true)).join('')
+    : `<p style="grid-column:1/-1;color:var(--muted);padding:40px 0">Mockup sample data covers the 1986–92 Vanagon. In the real build this grid lists the ${fmt(total)} parts above.</p>`;
+  if (v.key !== '21') document.getElementById('jobs').style.display = 'none';
+  document.getElementById('count').innerHTML = `<b>${fmt(total)}</b> parts${sys ? ' in ' + sys.name : ''}`;
+  document.getElementById('shown').textContent = `Showing ${show.length} of ${fmt(total)}`;
+</script>
+</body></html>
