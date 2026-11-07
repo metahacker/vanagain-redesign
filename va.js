@@ -115,7 +115,7 @@ function tiles(opts={}){
     const vq = v ? `&van=${v.key}` : (ALL ? '&van=all' : '');
     return `<a class="tile ${on===s.key?'on':''}" href="shop.html?cat=${s.key}${vq}" data-cat="${s.key}">
       <div class="im"><img class="${s.photo?'photo':''}" src="${s.img}" alt="" loading="lazy"></div>
-      <div class="t"><span>${opts.short?SHORT[s.key]:s.name}</span><span class="n">${fmt(n)}</span></div></a>`;
+      <div class="t"><span>${opts.short?(s.key==='electrical'?'Electrical/Ign.':SHORT[s.key]):s.name}</span><span class="n">${fmt(n)}</span></div></a>`;
   }).join('');
 }
 function card(p, showFit){
