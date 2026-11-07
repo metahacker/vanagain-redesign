@@ -270,3 +270,9 @@ a:hover .arrow{transform:translateX(3px)}
   .strip .tile .t span:first-child{min-height:0;white-space:nowrap}
   .strip .tile .t{font-size:12px}
 }
+/* shorter hero so the van picker peeks above the fold (photo stays anchored to the bottom) */
+@media (min-width:861px){
+  .hero{height:clamp(360px, calc(100svh - 400px), 760px);min-height:0}
+  #vans{padding-top:44px}
+  #vans .sec-head{margin-bottom:24px}
+}
