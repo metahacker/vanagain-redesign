@@ -276,3 +276,9 @@ a:hover .arrow{transform:translateX(3px)}
   #vans{padding-top:44px}
   #vans .sec-head{margin-bottom:24px}
 }
+
+/* tighter padding around part photos */
+.tile .im img{width:88%;height:88%}
+.card .im img{width:90%;height:90%}
+/* header rail fits on one line on desktop */
+@media (min-width:1101px){.rail{gap:0}.rail a{padding:7px 10px}.rail .sep{margin:0 6px}}
