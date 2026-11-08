@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VanAgain — Product (redesign mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="va.css">
+</head>
+<body data-default-van="21">
+<div id="hdr"></div>
+
+<div class="wrap"><nav class="crumbs" id="crumbs" aria-label="Breadcrumb"></nav></div>
+
+<div class="wrap pdp">
+  <div class="gallery">
+    <div class="stage" id="stage" role="button" tabindex="0" aria-label="Open full-screen photo viewer">
+      <img id="mainImg" src="" alt="">
+      <div class="lens" id="lens" aria-hidden="true"></div>
+      <button class="nav prev" id="sPrev" aria-label="Previous photo">‹</button>
+      <button class="nav next" id="sNext" aria-label="Next photo">›</button>
+      <span class="hint" id="hint">Hover to zoom · click for full screen</span>
+    </div>
+    <div class="thumbs" id="thumbs"></div>
+  </div>
+
+  <div class="info" id="info"></div>
+</div>
+
+<section class="sec tint" style="padding-top:56px"><div class="wrap">
+  <div class="sec-head"><div><div class="eyebrow">Often bought together</div><h2 style="margin-top:12px" id="relH">More for your van</h2></div>
+    <a class="link" id="relLink" href="shop.html">Shop all <span class="arrow">→</span></a></div>
+  <div class="grid" id="related"></div>
+</div></section>
+
+<!-- Lightbox -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <div class="lb-top"><span><b id="lbTitle"></b> · <span id="lbCount"></span></span><button class="lb-x" id="lbX" aria-label="Close">×</button></div>
+  <div class="lb-main" id="lbMain">
+    <button class="lb-arrow prev" id="lbPrev" aria-label="Previous photo">‹</button>
+    <div class="plate"><img id="lbImg" src="" alt="" draggable="false"></div>
+    <button class="lb-arrow next" id="lbNext" aria-label="Next photo">›</button>
+  </div>
+  <div class="lb-cap" id="lbCap"></div>
+  <div class="lb-strip" id="lbStrip"></div>
+</div>
+
+<div id="ftr"></div>
+<script src="va.js"></script>
+<script>
+  const key = qs.get('p') || 'tune-up-86-88';
+  const P = DETAILS[key] || DETAILS['tune-up-86-88'];
+  const sys = SYS.find(s => s.key === P.cat);
+  document.getElementById('hdr').outerHTML = header(P.cat);
+  document.getElementById('ftr').outerHTML = footer();
+  document.title = 'VanAgain — ' + P.nm;
+  const vq = VAN ? '&van=' + VAN.key : '';
+  document.getElementById('crumbs').innerHTML =
+    `<a href="shop.html?${VAN ? 'van=' + VAN.key : ''}">Shop</a><span>/</span><a href="shop.html?cat=${P.cat}${vq}">${sys.name}</a><span>/</span>${P.nm}`;
+
+  // ── fitment box
+  const fitsVan = VAN && P.vans.includes(VAN.key);
+  const fitVans = VANS.filter(v => P.vans.includes(v.key));
+  let fit;
+  if (!VAN) fit = `<div class="fitbox unk"><div><b>Will it fit?</b><span><a href="garage.html">Choose your van</a> and we'll tell you.</span></div></div>`;
+  else if (fitsVan) fit = `<div class="fitbox yes"><img src="${VAN.img}" alt=""><div><b>✓ Fits your ${label(VAN)}</b><span>${P.fits}</span></div></div>`;
+  else fit = `<div class="fitbox no"><img src="${VAN.img}" alt=""><div><b>Doesn't fit your ${label(VAN)}</b><span>Fits ${P.fits}. <a href="shop.html?cat=${P.cat}&van=${VAN.key}">See ${sys.name} parts for your van</a></span></div></div>`;
+
+  document.getElementById('info').innerHTML = `
+    <div class="eyebrow"><a href="shop.html?cat=${P.cat}${vq}">${sys.name}</a></div>
+    <h1>${P.nm}</h1>
+    <p class="sub">${P.sub}</p>
+    <div class="meta2"><span>Part # ${P.sku}</span><span>VanAgain</span></div>
+    <div class="price">${money(P.pr)}</div>
+    <div class="stock">${P.stock}</div>
+    ${fit}
+    <div class="buy"><div class="qty"><button aria-label="Fewer" onclick="q(-1)">−</button><input id="qty" value="1" aria-label="Quantity"><button aria-label="More" onclick="q(1)">+</button></div>
+      <button class="btn buyit">Add to cart</button></div>
+    <div class="ship">USPS and UPS rates shown at checkout.</div>
+    <div class="pd-sec" style="margin-top:22px"><h3>In the box</h3><ul>${P.inbox.map(x => `<li>${x}</li>`).join('')}</ul></div>
+    <div class="pd-sec"><h3>About this part</h3>${P.desc.map(x => `<p>${x}</p>`).join('')}</div>
+    <div class="pd-sec"><h3>Fits</h3><div class="fitlist">${fitVans.map(v => `<a href="shop.html?van=${v.key}" data-van="${v.key}" class="${VAN && v.key === VAN.key ? 'yes' : ''}">${label(v)}</a>`).join('')}</div></div>
+    <div class="askken"><div><b>Not sure it's the right one?</b><p>Send Ken your VIN or a photo of the old part.</p></div><a class="btn" href="home.html#help">Ask Ken</a></div>`;
+  window.q = d => { const i = document.getElementById('qty'); i.value = Math.max(1, (+i.value || 1) + d); };
+
+  // ── related
+  const rel = PRODUCTS.filter(p => p.page !== key && (!VAN || p.vans.includes(VAN.key))).slice(0, 4);
+  document.getElementById('related').innerHTML = rel.map(p => card(p, !!VAN)).join('');
+  if (VAN) document.getElementById('relH').textContent = 'More for your ' + label(VAN);
+  document.getElementById('relLink').href = 'shop.html?' + (VAN ? 'van=' + VAN.key : '');
+
+  // ── gallery + hover zoom
+  let cur = 0;
+  const stage = document.getElementById('stage'), main = document.getElementById('mainImg'), lens = document.getElementById('lens');
+  const thumbs = document.getElementById('thumbs');
+  thumbs.innerHTML = P.imgs.map((src, i) => `<button data-i="${i}" aria-label="${P.alts[i]}"><img src="${src}" alt=""></button>`).join('');
+  P.imgs.forEach(src => { const im = new Image(); im.src = src; });   // preload full-res
+  function show(i){
+    cur = (i + P.imgs.length) % P.imgs.length;
+    main.src = P.imgs[cur]; main.alt = P.alts[cur];
+    lens.style.backgroundImage = `url("${P.imgs[cur]}")`;
+    thumbs.querySelectorAll('button').forEach((b, j) => b.classList.toggle('on', j === cur));
+  }
+  thumbs.addEventListener('click', e => { const b = e.target.closest('button'); if (b) show(+b.dataset.i); });
+  thumbs.addEventListener('mouseover', e => { const b = e.target.closest('button'); if (b) show(+b.dataset.i); });
+  document.getElementById('sPrev').onclick = e => { e.stopPropagation(); show(cur - 1); };
+  document.getElementById('sNext').onclick = e => { e.stopPropagation(); show(cur + 1); };
+  const ZOOM = 2.6;
+  const canHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (canHover) {
+    stage.addEventListener('mousemove', e => {
+      if (e.target.closest('.nav')) { stage.classList.remove('zooming'); return; }
+      const r = stage.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width * 100, y = (e.clientY - r.top) / r.height * 100;
+      lens.style.backgroundSize = `${ZOOM * 92}%`;
+      lens.style.backgroundPosition = `${x}% ${y}%`;
+      stage.classList.add('zooming');
+    });
+    stage.addEventListener('mouseleave', () => stage.classList.remove('zooming'));
+  } else {
+    document.getElementById('hint').textContent = 'Tap for full screen';
+  }
+  stage.addEventListener('click', e => { if (!e.target.closest('.nav')) openLB(cur); });
+  stage.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLB(cur); } });
+
+  // ── lightbox
+  const lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'), lbMain = document.getElementById('lbMain');
+  const lbStrip = document.getElementById('lbStrip');
+  document.getElementById('lbTitle').textContent = P.nm;
+  lbStrip.innerHTML = P.imgs.map((src, i) => `<button data-i="${i}" aria-label="${P.alts[i]}"><img src="${src}" alt=""></button>`).join('');
+  let li = 0, lastFocus = null;
+  function lbShow(i){
+    li = (i + P.imgs.length) % P.imgs.length;
+    lbMain.classList.remove('z'); lbImg.style.transformOrigin = '50% 50%';
+    lbImg.src = P.imgs[li]; lbImg.alt = P.alts[li];
+    document.getElementById('lbCount').textContent = `${li + 1} / ${P.imgs.length}`;
+    document.getElementById('lbCap').textContent = P.alts[li];
+    lbStrip.querySelectorAll('button').forEach((b, j) => b.classList.toggle('on', j === li));
+  }
+  function openLB(i){ lastFocus = document.activeElement; lbShow(i); lb.classList.add('open'); document.body.style.overflow = 'hidden'; document.getElementById('lbX').focus(); }
+  function closeLB(){ lb.classList.remove('open'); document.body.style.overflow = ''; show(li); if (lastFocus) lastFocus.focus(); }
+  document.getElementById('lbX').onclick = closeLB;
+  document.getElementById('lbPrev').onclick = e => { e.stopPropagation(); lbShow(li - 1); };
+  document.getElementById('lbNext').onclick = e => { e.stopPropagation(); lbShow(li + 1); };
+  lbStrip.addEventListener('click', e => { const b = e.target.closest('button'); if (b) lbShow(+b.dataset.i); });
+  // click the photo to zoom in place inside the lightbox; move to pan; click again to zoom out
+  function pan(e){
+    const r = lbImg.getBoundingClientRect();
+    const x = Math.min(100, Math.max(0, (e.clientX - r.left) / r.width * 100));
+    const y = Math.min(100, Math.max(0, (e.clientY - r.top) / r.height * 100));
+    lbImg.style.transformOrigin = `${x}% ${y}%`;
+  }
+  lbMain.addEventListener('click', e => {
+    if (e.target.closest('.lb-arrow')) return;
+    if (!e.target.closest('.plate')) { closeLB(); return; }
+    if (!lbMain.classList.contains('z')) pan(e);
+    lbMain.classList.toggle('z');
+  });
+  lbMain.addEventListener('mousemove', e => { if (lbMain.classList.contains('z')) pan(e); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLB();
+    if (e.key === 'ArrowLeft') lbShow(li - 1);
+    if (e.key === 'ArrowRight') lbShow(li + 1);
+  });
+  // swipe on touch screens
+  let tx = null;
+  lbMain.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
+  lbMain.addEventListener('touchend', e => {
+    if (tx === null || lbMain.classList.contains('z')) return;
+    const dx = e.changedTouches[0].clientX - tx; tx = null;
+    if (Math.abs(dx) > 50) lbShow(li + (dx < 0 ? 1 : -1));
+  });
+
+  show(0);
+</script>
+</body></html>

@@ -9,6 +9,7 @@ Clickable design mockups for [vanagain.com](https://vanagain.com): a cleaner, ph
 | [Home](https://metahacker.github.io/vanagain-redesign/home.html) | Hero, "which van is yours", shop by system, fitment help |
 | [Shop](https://metahacker.github.io/vanagain-redesign/shop.html?van=21) | Shop landing filtered to one van |
 | [Van picker](https://metahacker.github.io/vanagain-redesign/garage.html) | "My van" as a full page |
+| [Product page](https://metahacker.github.io/vanagain-redesign/product.html?p=tune-up-86-88) | Detail page: hover to zoom in place, click for a full-screen photo viewer |
 | [Navigation](https://metahacker.github.io/vanagain-redesign/nav.html) | The navigation design and how the old menu maps to the new one |
 
 ## The idea
@@ -25,7 +26,7 @@ Plain static HTML/CSS/JS. No build step. Open `index.html` or serve the folder.
 
 ## Photo credits
 
-Part photos and the VanAgain wordmark: vanagain.com.
+Part photos, product descriptions and the VanAgain wordmark: vanagain.com. The tune-up kit's first photo is a layout of VanAgain's own part photos.
 
 Van photos from Wikimedia Commons:
 

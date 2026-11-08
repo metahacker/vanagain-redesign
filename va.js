@@ -34,6 +34,9 @@ const SYS = [
 const SHORT = {engine:'Engine',cooling:'Cooling',fuel:'Fuel & Air',electrical:'Electrical & Ignition',brakes:'Brakes',suspension:'Suspension',gearbox:'Gearbox',exhaust:'Exhaust',body:'Body & Trim',climate:'Heat & A/C',camper:'Camper',tools:'Tools'};
 // Real products (titles tidied: fitment moved out of the name into its own line)
 const PRODUCTS = [
+  {img:'pd-tune-kit.jpg', cat:'electrical', nm:'Tune-up kit, 2.1L', sku:'VATuneupParts86-88', pr:179.95, fits:'1986–88 Vanagon 2.1L', vans:['21'], page:'tune-up-86-88'},
+  {img:'pd-therm-1.jpg', cat:'cooling', nm:'Aluminum thermostat housing kit', sku:'025121115AL', pr:179.95, fits:'1986–92 Vanagon 2.1L', vans:['21'], page:'thermostat-housing-al'},
+  {img:'pd-led-1.jpg', cat:'electrical', nm:'7" round LED headlight set', sku:'LEDHeadlight7', pr:139.95, fits:'1980–92 Vanagon', vans:['ac','dsl','19','21'], page:'led-headlights-7'},
   {img:'p-caliper.jpg',   cat:'brakes',     nm:'Brake caliper carrier',              sku:'251615125C',   pr:79.95,  fits:'1986–91 Vanagon', vans:['21']},
   {img:'p-manifold.jpg',  cat:'exhaust',    nm:'Exhaust manifold, cast-iron Y-pipe', sku:'025251217',    pr:99.95,  fits:'1986–91 Vanagon 2.1L', vans:['21']},
   {img:'p-rackbush.jpg',  cat:'suspension', nm:'Steering rack mount bushing, Powerflex', sku:'PFF85-1003', pr:107.99, fits:'All Vanagon 1980–92', vans:['ac','dsl','19','21']},
@@ -47,6 +50,35 @@ const PRODUCTS = [
   {img:'p-evap.jpg',      cat:'climate',    nm:'A/C evaporator, camper',             sku:'253260105A',   pr:899.00, fits:'1987–92 Westfalia', vans:['19','21']},
   {img:'p-coolhose.jpg',  cat:'cooling',    nm:'Coolant hose, water pump to head flange', sku:'026121053G', pr:9.95, fits:'1983–92 Vanagon', vans:['19','21']},
 ];
+
+
+// Product detail pages (real VanAgain listings; copy lightly edited for length)
+const DETAILS = {
+  'tune-up-86-88': {
+    nm:'Tune-up kit, 2.1L', sub:'Everything for a full tune-up in one box', sku:'VATuneupParts86-88', pr:179.95, cat:'electrical',
+    vans:['21'], fits:'1986–88 Vanagon 2.1L (MV)', stock:'In stock · ships today',
+    imgs:['pd-tune-kit.jpg','pd-tune-1.jpg','pd-tune-2.jpg','pd-tune-3.jpg','pd-tune-4.jpg','pd-tune-5.jpg','pd-tune-6.jpg','pd-tune-7.jpg'],
+    alts:['All seven parts in the kit','Spark plugs (4)','Spark plug wire set','Distributor cap','Rotor','Air filter','Oil filter','Fuel filter'],
+    inbox:['4 spark plugs (NGK)','Spark plug wire set','Distributor cap','Rotor','Air filter (Mann)','Oil filter (Mann / Mahle)','Fuel filter (Bosch)'],
+    desc:['Everything you need to start from zero on a tune-up: four spark plugs, a plug wire set, distributor cap, rotor, air filter, fuel filter and oil filter. The best-quality parts available right now, from Bosch, Mann, Mahle and NGK.','Good for a van you just bought, maintenance you have been putting off, or a box of spares for a long trip.']
+  },
+  'led-headlights-7': {
+    nm:'7" round LED headlight set', sub:'DOT approved, with a halo ring', sku:'LEDHeadlight7', pr:139.95, cat:'electrical',
+    vans:['ac','dsl','19','21'], fits:'1980–85 Vanagon, and 1986–92 with the round-light grille kit', stock:'In stock · ships today',
+    imgs:['pd-led-1.jpg','pd-led-2.jpg','pd-led-3.jpg','pd-led-4.jpg'],
+    alts:['Headlight pair with halo ring lit','Installed on a white Vanagon, side view','Installed, front view','Dimensions'],
+    inbox:['2 LED headlight units','Plug-and-play H4 connectors'],
+    desc:['A pair of LED headlights that fit the 7" round buckets used on 1980–85 Vanagons and on later vans with the round-light grille kit. Very bright, DOT approved, with a halo ring that glows white as a running light or flashes amber with the turn signals (extra wiring needed for the halo).','They draw about half the current of the stock lamps, so you do not need relays to protect the headlight switch. One small tweak: bend one of the three tabs in the bucket about 1/32" so the light seats snugly. Takes a minute with pliers.']
+  },
+  'thermostat-housing-al': {
+    nm:'Aluminum thermostat housing kit', sub:'Lower housing with new sensors, 2WD and Syncro', sku:'025121115AL', pr:179.95, cat:'cooling',
+    vans:['21'], fits:'1986–92 Vanagon 2.1L, 2WD and Syncro', stock:'In stock · ships today',
+    imgs:['pd-therm-1.jpg','pd-therm-2.jpg','pd-therm-3.jpg'],
+    alts:['Aluminum lower thermostat housing','Temp II sensor','Gauge sender with seal'],
+    inbox:['Aluminum lower thermostat housing','Temp II sensor','Gauge sender'],
+    desc:['The lower thermostat housing for the 2.1L Wasserboxer, 1986–92, 2WD or Syncro. Aluminum, aftermarket, and excellent quality. If you have a Syncro, this is exactly the one you should have.','2WD vans with the original plastic housing need a small change for the gauge sender, which has one pin instead of two: cut off the plug and crimp a single female spade onto the yellow wire with the red stripe. The brown ground wire is no longer needed, because the sensor grounds through the aluminum housing.']
+  },
+};
 
 const fmt = n => n.toLocaleString('en-US');
 const money = n => '$' + n.toFixed(2);
@@ -119,8 +151,8 @@ function tiles(opts={}){
   }).join('');
 }
 function card(p, showFit){
-  return `<article class="card" data-cat="${p.cat}"><a class="im" href="#"><img src="${p.img}" alt="" loading="lazy"></a>
-    <div class="nm">${p.nm}</div>
+  return `<article class="card" data-cat="${p.cat}"><a class="im" href="${p.page?'product.html?p='+p.page:'#'}"><img src="${p.img}" alt="" loading="lazy"></a>
+    <a class="nm" href="${p.page?'product.html?p='+p.page:'#'}">${p.nm}</a>
     <div class="meta"><span>${p.sku}</span><span>${p.fits}</span></div>
     ${showFit?'<div class="fit">Fits your van</div>':''}
     <div class="row"><span class="pr">${money(p.pr)}</span><button class="add">Add</button></div></article>`;
